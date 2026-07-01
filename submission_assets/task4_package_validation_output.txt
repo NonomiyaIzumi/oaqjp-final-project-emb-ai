@@ -1,0 +1,2 @@
+EmotionDetection imported successfully
+<function emotion_detector at 0x000001ED7243E3E0>
