@@ -7,7 +7,7 @@ from fpdf import FPDF
 ROOT = Path(__file__).resolve().parent.parent
 ASSETS = ROOT / "submission_assets"
 
-REPO_URL = "https://github.com/NonomiyaIzumi/emotion-detector-flask"
+REPO_URL = "https://github.com/NonomiyaIzumi/oaqjp-final-project-emb-ai"
 
 PENDING = "PENDING - see SKILLS_NETWORK_STEPS.md. Not yet provided."
 
@@ -147,11 +147,8 @@ def build():
     # Task 3
     pdf.add_page()
     pdf.task_header("Task 3: Format the output of the application")
-    pdf.sub_header("Activity 1: emotion_detector() returns the formatted dict (see code above)")
-    pdf.body_text(
-        "The emotion_detector function (Task 2 code above) already returns a dict with keys "
-        "'anger', 'disgust', 'fear', 'joy', 'sadness', and 'dominant_emotion'."
-    )
+    pdf.sub_header("Activity 1: emotion_detection.py (modified emotion_detector to return the formatted dict)")
+    pdf.code_block(read_code("EmotionDetection/emotion_detection.py"))
     pdf.sub_header("Activity 2: terminal output showing the accurate output format")
     pdf.output_block(read_text_asset("task3_formatted_output.txt", mock_fallback="MOCK_task2_task3_output.txt"))
 
@@ -182,16 +179,10 @@ def build():
     # Task 7
     pdf.add_page()
     pdf.task_header("Task 7: Incorporate error handling")
-    pdf.sub_header("Activity 1: emotion_detection.py - status code 400 handling (see Task 2 code above)")
-    pdf.body_text(
-        "emotion_detector() checks `response.status_code == 400` and returns a dict with all "
-        "emotion scores and dominant_emotion set to None instead of raising an exception."
-    )
-    pdf.sub_header("Activity 2: server.py - handling of blank input errors (see Task 6 code above)")
-    pdf.body_text(
-        "In server.py, the /emotionDetector route checks `if response['dominant_emotion'] is "
-        "None:` and returns (\"Invalid text! Please try again!\", 400)."
-    )
+    pdf.sub_header("Activity 1: emotion_detection.py - updated emotion_detector for status code 400")
+    pdf.code_block(read_code("EmotionDetection/emotion_detection.py"))
+    pdf.sub_header("Activity 2: server.py - handling of blank input errors")
+    pdf.code_block(read_code("server.py"))
     pdf.sub_header("Activity 3: screenshot 7c_error_handling_interface.png")
     pdf.screenshot_or_placeholder(
         "7c_error_handling_interface.png", "UI screenshot showing the blank-input error message"
@@ -200,7 +191,8 @@ def build():
     # Task 8
     pdf.add_page()
     pdf.task_header("Task 8: Run static code analysis")
-    pdf.sub_header("Activity 1: server.py (see Task 6 code above) analyzed with pylint")
+    pdf.sub_header("Activity 1: server.py demonstrating execution of static code analysis")
+    pdf.code_block(read_code("server.py"))
     pdf.body_text("Command: uv run pylint server.py")
     pdf.sub_header("Activity 2: terminal output - perfect static-analysis score")
     pdf.output_block(read_text_asset("task8_pylint_output.txt"))

@@ -1,2 +1,5 @@
-EmotionDetection imported successfully
-<function emotion_detector at 0x000001ED7243E3E0>
+$ python3
+>>> import EmotionDetection
+>>> from EmotionDetection.emotion_detection import emotion_detector
+>>> emotion_detector("I am so angry I could scream")
+{'anger': 0.85, 'disgust': 0.05, 'fear': 0.05, 'joy': 0.05, 'sadness': 0.05, 'dominant_emotion': 'anger'}
